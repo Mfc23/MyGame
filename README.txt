@@ -1,1 +1,1 @@
-Temporary test file, will edit later
+This is a self given project to remake an old rpg I made in highschool while forcing myslef to use SQL or SQL light as a means of saving multiple accounts.
