@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int mode = 1;
 
+    private SQLControl helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
