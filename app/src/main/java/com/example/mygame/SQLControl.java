@@ -12,17 +12,19 @@ public class SQLControl extends SQLiteOpenHelper {
     private static final String userName = "UserName";
     private static final String passWord = "password";
 
-    public SQLControl(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public SQLControl(Context context) {
+        super(context, Table1, null,  1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+    public void onCreate(SQLiteDatabase db) {
+        String createLogin =  "USES " + Table1 + "FOR CREATION OF LOGIN";
+        db.execSQL(createLogin);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("Drop if login exists for" + Table1);
+        onCreate(db);
     }
 }
