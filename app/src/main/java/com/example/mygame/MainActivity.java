@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //goes through the users to see if the name exists
-    private boolean findUser(String checkedName){
+    private String findUser(String checkedName){
         String[] names;
 
         for(int i = 0; i < users.size() - 1; i++)
@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
             names = users.get(i);
 
             if(checkedName.equals(names[1]))
-                return true;
+                return names[2];
         }
 
-        return false;
+        return "";
     }
 
 
