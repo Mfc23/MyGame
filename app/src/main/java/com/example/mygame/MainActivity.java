@@ -2,12 +2,21 @@ package com.example.mygame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private ArrayList<String[]> users;
 
     private TextView header;
     private TextView alterOp;
@@ -25,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //loads all users for the app
+        loadUsers();
 
         //set up text views
         header   = findViewById(R.id.headerMain);
@@ -81,5 +93,35 @@ public class MainActivity extends AppCompatActivity {
         topBut.setText("LOGIN");
         botBut.setText("NEW SAVE");
         mode = 1;
+    }
+
+
+    //loads the array list or makes a new one
+    private void loadUsers(){
+        //loads the data from shared prefrences
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("Data List", null);
+        Type type = new TypeToken<ArrayList<String[]>>() {}.getType();
+        users = gson.fromJson(json,type);
+
+        //if no data is found, makes a new arraylist
+        if (users == null){
+            users = new ArrayList<>();
+        }
+    }
+
+    //saves the new incoming data
+    private void saveUser(String[] save){
+        //adds the new information to the array list
+        users.add(save);
+
+        //saves the data
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        editor.putString("Data List", json);
+        editor.apply();
     }
 }
