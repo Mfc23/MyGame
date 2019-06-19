@@ -96,6 +96,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //goes through the users to see if the name exists
+    private boolean findUser(String checkedName){
+        String[] names;
+
+        for(int i = 0; i < users.size() - 1; i++)
+        {
+            names = users.get(i);
+
+            if(checkedName.equals(names[1]))
+                return true;
+        }
+
+        return false;
+    }
+
+
     //loads the array list or makes a new one
     private void loadUsers(){
         //loads the data from shared prefrences
