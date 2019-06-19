@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -70,10 +71,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkLogin(){
+        //needed strings
+        String userName = userInfo.getText().toString();
+        String enteredPass = passWord.getText().toString();
+        String realPass = findUser(userName);
 
+        //possible error message
+        String toast = "";
+
+        if (realPass.equals(""))
+            toast = "Username not found!";
+
+        else if (realPass.equals(enteredPass))
+            toNext();
+        else
+            toast = "Password was not correct!";
+
+
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT);
     }
 
     public void createLogin(){
+
+    }
+
+    public void toNext(){
 
     }
 
