@@ -94,7 +94,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createLogin(){
+        //needed strings
+        String userName = userInfo.getText().toString();
+        String enteredPass = passWord.getText().toString();
+        String possPass = findUser(userName);
+        String toast;
 
+        //if user does not exist creates the user
+        if(possPass.equals(""))
+        {
+            //puts new user info into an array
+            String[] newUser = new String[2];
+            newUser[0] = userName;
+            newUser[1] = enteredPass;
+
+            //saves the user
+            saveUser(newUser);
+
+            //sets a success message
+            toast = "New user added! Try Logging in!";
+
+            //sets the controls to login screen
+            setLog();
+        }
+        //if user exists, creates an error message
+        else
+            toast = "User already exists, try again or log in!";
+
+        //displays the success or failure
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT);
     }
 
     public void toNext(){
