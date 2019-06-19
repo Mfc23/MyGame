@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //checks if the user exists and if the password matches
+    //if so, moves to the next stage
     public void checkLogin(){
         //needed strings
         String userName = userInfo.getText().toString();
@@ -79,15 +81,15 @@ public class MainActivity extends AppCompatActivity {
         //possible error message
         String toast = "";
 
+        //checks if password exists
         if (realPass.equals(""))
             toast = "Username not found!";
-
         else if (realPass.equals(enteredPass))
             toNext();
         else
             toast = "Password was not correct!";
 
-
+        //toasts error message
         Toast.makeText(this, toast, Toast.LENGTH_SHORT);
     }
 
@@ -126,10 +128,12 @@ public class MainActivity extends AppCompatActivity {
         {
             names = users.get(i);
 
+            //If user exists returns their password
             if(checkedName.equals(names[1]))
                 return names[2];
         }
 
+        //if the user does not exist, returns ""
         return "";
     }
 
